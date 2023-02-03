@@ -1,24 +1,24 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { DB } from '../DataBase/database';
+import { User } from './entities/user.entity';
 
 // type userDto = CreateUserDto | UpdateUserDto;
 @Injectable()
 export class UserService {
   create(createUserDto: CreateUserDto) {
-    const newUser = new CreateUserDto();
-    const newUserData = {
-      ...createUserDto,
+    const itemData = {
       id: uuidv4(),
-      version: 0,
+      ...createUserDto,
+      version: 1,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     };
-    Object.assign(newUser, newUserData);
-    DB.users.push(newUser);
-    return newUser;
+    DB.users.push(itemData);
+    const { password, ...rest } = itemData;
+    return rest;
   }
 
   findAll() {
@@ -26,25 +26,45 @@ export class UserService {
   }
 
   findOne(id: string) {
-    return DB.users.find((user) => user.id === id);
+    const user = DB.users.find((item) => item.id === id);
+
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+    const { password, ...rest } = user;
+    return rest;
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
-    const userIndex = DB.users.findIndex((user) => user.id === id);
-    if (DB.users[userIndex].password !== updateUserDto.password) {
-      const newUserData = {
-        password: updateUserDto.password,
-        version: DB.users[userIndex].version + 1,
-        updateAt: Date.now(),
-      };
-      const userData = { ...DB.users[userIndex], ...newUserData };
-      DB.users.splice(userIndex, 1, userData);
+    const user = DB.users.find((item) => item.id === id);
+
+    if (!user) {
+      throw new HttpException('Useric not found', HttpStatus.NOT_FOUND);
     }
-    return DB.users[userIndex];
+
+    if (user.password !== updateUserDto.oldPassword) {
+      throw new HttpException('Wrong password', HttpStatus.FORBIDDEN);
+    }
+
+    const index = DB.users.indexOf(user);
+    if (user.password !== updateUserDto.newPassword) {
+      const itemData = {
+        ...user,
+        password: updateUserDto.newPassword,
+        version: user.version + 1,
+        updatedAt: Date.now(),
+      };
+      Object.assign(DB.users[index], itemData);
+    }
+    const { password, ...rest } = DB.users[index];
+    return rest;
   }
 
   remove(id: string) {
+    const user = DB.users.find((user) => user.id === id);
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
     DB.users = DB.users.filter((user) => user.id !== id);
-    return;
   }
 }

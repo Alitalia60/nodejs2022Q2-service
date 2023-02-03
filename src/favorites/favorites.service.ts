@@ -1,26 +1,60 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFavoriteDto } from './dto/create-favorite.dto';
-import { UpdateFavoriteDto } from './dto/update-favorite.dto';
+import { DB } from '../DataBase/database';
+import { HttpException } from '@nestjs/common/exceptions';
+import { HttpStatus } from '@nestjs/common/enums';
 
 @Injectable()
 export class FavoritesService {
-  create(createFavoriteDto: CreateFavoriteDto) {
-    return 'This action adds a new favorite';
-  }
-
   findAll() {
     return `This action returns all favorites`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} favorite`;
+  removeTrack(id: string) {
+    return `This action removes track #${id} `;
+  }
+  removeAlbum(id: string) {
+    return `This action removes album #${id}`;
+  }
+  removeArtist(id: string) {
+    return `This action removes artist #${id}`;
   }
 
-  update(id: number, updateFavoriteDto: UpdateFavoriteDto) {
-    return `This action updates a #${id} favorite`;
+  addTrackToFavs(id: string) {
+    const item = DB.tracks.find((item) => item.id === id);
+    if (!item) {
+      throw new HttpException(
+        'Artist not found',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+    if (!DB.favorites.includes(id)) {
+      DB.favorites.push(id);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} favorite`;
+  addArtistToFavs(id: string) {
+    const item = DB.tracks.find((item) => item.id === id);
+    if (!item) {
+      throw new HttpException(
+        'Artist not found',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+    if (!DB.favorites.includes(id)) {
+      DB.favorites.push(id);
+    }
+  }
+
+  addAlbumToFavs(id: string) {
+    const item = DB.tracks.find((item) => item.id === id);
+    if (!item) {
+      throw new HttpException(
+        'Artist not found',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+    if (!DB.favorites.includes(id)) {
+      DB.favorites.push(id);
+    }
   }
 }

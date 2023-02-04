@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "131b6766-f01e-4e60-a68f-6f9e3e783c86",
+		"_postman_id": "1072c73c-c418-41cc-8683-ddd1bf3849d5",
 		"name": "Home library",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23920464"
+		"_exporter_id": "18339158"
 	},
 	"item": [
 		{
@@ -780,15 +780,35 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/favs/track/",
+							"raw": "localhost:4000/favs/artist/304d6889-a92f-4c4c-ab47-09162348e6f0",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
 								"favs",
-								"track",
-								""
+								"artist",
+								"304d6889-a92f-4c4c-ab47-09162348e6f0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add album to favs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/album/1c3bd68b-2312-4cd0-a446-e6f0b1e9ddd7",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								"album",
+								"1c3bd68b-2312-4cd0-a446-e6f0b1e9ddd7"
 							]
 						}
 					},

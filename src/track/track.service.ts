@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
-import { DB } from '../DataBase/database';
+import { DB, favoritsDB } from '../DataBase/database';
 import { v4 as uuidv4 } from 'uuid';
 import { Track } from '../track/entities/track.entity';
 
@@ -48,5 +48,7 @@ export class TrackService {
       throw new HttpException('Track not found', HttpStatus.NOT_FOUND);
     }
     DB.tracks = DB.tracks.filter((item) => item.id !== id);
+    //!! delete track from Favs
+    favoritsDB.tracks = favoritsDB.tracks.filter((trackId) => trackId !== id);
   }
 }

@@ -1,9 +1,15 @@
-import { IsNumber, IsString, MinLength } from 'class-validator';
+import { IsNumber, IsString, MinLength, ValidateIf } from 'class-validator';
 
 export class CreateTrackDto {
   @IsString()
   name: string;
 
   @IsNumber()
-  duration: number; // integer number
+  duration: number;
+
+  @ValidateIf((o) => ['string', null].includes(typeof o))
+  artistId: string | null;
+
+  @ValidateIf((o) => ['string', null].includes(typeof o))
+  albumId: string | null;
 }

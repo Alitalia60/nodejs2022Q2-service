@@ -2,7 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { v4 as uuidv4 } from 'uuid';
-import { DB } from 'src/DataBase/database';
+import { DB, favoritsDB } from 'src/DataBase/database';
 
 @Injectable()
 export class AlbumService {
@@ -25,7 +25,6 @@ export class AlbumService {
   }
 
   update(id: string, updateAlbumDto: UpdateAlbumDto) {
-
     const index = DB.albums.findIndex((item) => item.id === id);
     if (index < 0) {
       throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
@@ -41,5 +40,10 @@ export class AlbumService {
       throw new HttpException('Albums not found', HttpStatus.NOT_FOUND);
     }
     DB.albums = DB.albums.filter((item) => item.id !== id);
+
+    favoritsDB.albums = favoritsDB.albums.filter((albumId) => albumId !== id);
+    DB.tracks.forEach((track) => {
+      track.albumId = track.albumId === id ? null : track.albumId;
+    });
   }
 }

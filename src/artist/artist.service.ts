@@ -2,7 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { v4 as uuidv4 } from 'uuid';
-import { DB } from 'src/DataBase/database';
+import { DB, favoritsDB } from 'src/DataBase/database';
 
 @Injectable()
 export class ArtistService {
@@ -43,5 +43,15 @@ export class ArtistService {
       throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
     }
     DB.artists = DB.artists.filter((item) => item.id !== id);
+    //!! delete artist from Favs
+    favoritsDB.artists = favoritsDB.artists.filter(
+      (artistId) => artistId !== id,
+    );
+    DB.tracks.forEach((track) => {
+      track.artistId = track.artistId === id ? null : track.artistId;
+    });
+    DB.albums.forEach((album) => {
+      album.artistId = album.artistId === id ? null : album.artistId;
+    })
   }
 }

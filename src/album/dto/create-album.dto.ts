@@ -1,4 +1,4 @@
-import { IsNumber, IsString, MinLength } from 'class-validator';
+import { IsNumber, IsString, MinLength, ValidateIf } from 'class-validator';
 
 export class CreateAlbumDto {
   @IsString()
@@ -8,5 +8,7 @@ export class CreateAlbumDto {
   // @MinLength(4)
   @IsNumber()
   year: number;
+
+  @ValidateIf((o) => ['string', null].includes(typeof o))
   artistId: string | null; // refers to Artist
 }

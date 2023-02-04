@@ -8,6 +8,7 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import { FavoritesService } from './favorites.service';
+import { ParseUUIDPipe } from '@nestjs/common/pipes';
 
 @Controller('favs')
 export class FavoritesController {
@@ -19,17 +20,17 @@ export class FavoritesController {
   }
 
   @Post('track/:id')
-  addTrackToFavs(@Param('id') id: string) {
+  addTrackToFavs(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.favoritesService.addTrackToFavs(id);
   }
 
   @Post('album/:id')
-  addAlbumToFavs(@Param('id') id: string) {
+  addAlbumToFavs(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.favoritesService.addAlbumToFavs(id);
   }
 
   @Post('artist/:id')
-  addArtistToFavs(@Param('id') id: string) {
+  addArtistToFavs(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.favoritesService.addArtistToFavs(id);
   }
 

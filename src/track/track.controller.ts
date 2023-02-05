@@ -13,7 +13,9 @@ import { CreateTrackDto } from './dto/create-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
 import { ParseUUIDPipe } from '@nestjs/common/pipes';
 import { HttpStatus } from '@nestjs/common/enums';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('track')
 @Controller('track')
 export class TrackController {
   constructor(private readonly trackService: TrackService) { }

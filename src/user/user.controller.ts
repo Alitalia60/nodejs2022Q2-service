@@ -13,8 +13,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { HttpStatus } from '@nestjs/common/enums';
 import { HttpCode } from '@nestjs/common/decorators';
+import { ApiTags } from '@nestjs/swagger';
 
-// @ApiTags
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }

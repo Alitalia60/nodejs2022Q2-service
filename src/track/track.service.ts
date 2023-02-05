@@ -48,7 +48,6 @@ export class TrackService {
       throw new HttpException('Track not found', HttpStatus.NOT_FOUND);
     }
     DB.tracks = DB.tracks.filter((item) => item.id !== id);
-    //!! delete track from Favs
     favoritsDB.tracks = favoritsDB.tracks.filter((trackId) => trackId !== id);
   }
 }

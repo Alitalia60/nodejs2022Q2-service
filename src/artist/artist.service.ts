@@ -43,7 +43,7 @@ export class ArtistService {
       throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
     }
     DB.artists = DB.artists.filter((item) => item.id !== id);
-    //!! delete artist from Favs
+
     favoritsDB.artists = favoritsDB.artists.filter(
       (artistId) => artistId !== id,
     );
@@ -52,6 +52,6 @@ export class ArtistService {
     });
     DB.albums.forEach((album) => {
       album.artistId = album.artistId === id ? null : album.artistId;
-    })
+    });
   }
 }

@@ -9,6 +9,21 @@ import { Track } from '../track/entities/track.entity';
 export class TrackService {
   create(createTrackDto: CreateTrackDto) {
     const { artistId, albumId } = createTrackDto;
+
+    if (artistId) {
+      const artist = DB.artists.find((item) => item.id === artistId);
+      if (!artist) {
+        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+      }
+    }
+
+    if (albumId) {
+      const album = DB.albums.find((item) => item.id === albumId);
+      if (!album) {
+        throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
+      }
+    }
+
     const item: Track = {
       id: uuidv4(),
       artistId: !artistId ? null : artistId,
@@ -36,6 +51,20 @@ export class TrackService {
     const index = DB.tracks.findIndex((item) => item.id === id);
     if (index < 0) {
       throw new HttpException('Track not found', HttpStatus.NOT_FOUND);
+    }
+    const { artistId, albumId } = updateTrackDto;
+    if (artistId) {
+      const artist = DB.artists.find((item) => item.id === artistId);
+      if (!artist) {
+        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+      }
+    }
+
+    if (albumId) {
+      const album = DB.albums.find((item) => item.id === albumId);
+      if (!album) {
+        throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
+      }
     }
 
     const itemData = { id: DB.tracks[index].id, ...updateTrackDto };

@@ -8,6 +8,13 @@ import { DB, favoritsDB } from 'src/DataBase/database';
 export class AlbumService {
   create(createAlbumDto: CreateAlbumDto) {
     const { artistId } = createAlbumDto;
+    if (artistId) {
+      const artist = DB.artists.find((item) => item.id === artistId);
+      if (!artist) {
+        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+      }
+    }
+
     const item = {
       id: uuidv4(),
       artistId: !artistId ? null : artistId,
@@ -34,6 +41,14 @@ export class AlbumService {
     if (index < 0) {
       throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
     }
+    const { artistId } = updateAlbumDto;
+    if (artistId) {
+      const artist = DB.artists.find((item) => item.id === artistId);
+      if (!artist) {
+        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+      }
+    }
+
     const itemData = { id: DB.albums[index].id, ...updateAlbumDto };
     Object.assign(DB.albums[index], itemData);
     return DB.albums[index];

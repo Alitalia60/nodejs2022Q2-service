@@ -7,7 +7,12 @@ import { DB, favoritsDB } from 'src/DataBase/database';
 @Injectable()
 export class AlbumService {
   create(createAlbumDto: CreateAlbumDto) {
-    const item = { id: uuidv4(), artistId: null, ...createAlbumDto };
+    const { artistId } = createAlbumDto;
+    const item = {
+      id: uuidv4(),
+      artistId: !artistId ? null : artistId,
+      ...createAlbumDto,
+    };
     DB.albums.push(item);
     return item;
   }

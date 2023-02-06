@@ -8,10 +8,11 @@ import { Track } from '../track/entities/track.entity';
 @Injectable()
 export class TrackService {
   create(createTrackDto: CreateTrackDto) {
+    const { artistId, albumId } = createTrackDto;
     const item: Track = {
       id: uuidv4(),
-      artistId: null,
-      albumId: null,
+      artistId: !artistId ? null : artistId,
+      albumId: !albumId ? null : albumId,
       ...createTrackDto,
     };
     DB.tracks.push(item);

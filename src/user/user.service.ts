@@ -21,7 +21,11 @@ export class UserService {
   }
 
   findAll() {
-    return DB.users;
+    // return DB.users;
+    return DB.users.map((user) => {
+      const { password, ...rest } = user;
+      return rest;
+    });
   }
 
   findOne(id: string) {

@@ -7,6 +7,10 @@ import { AlbumModule } from './album/album.module';
 import { TrackModule } from './track/track.module';
 import { ArtistModule } from './artist/artist.module';
 import { FavoritesModule } from './favorites/favorites.module';
+import { config as dotenvConfig } from 'dotenv';
+
+dotenvConfig();
+const PORT = Number(process.env.PORT) || 4000;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -30,6 +34,8 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
-  await app.listen(4000);
+  await app.listen(PORT, () => {
+    console.log(`Server is running on port: ${PORT}`);
+  });
 }
 bootstrap();

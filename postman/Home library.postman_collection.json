@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e4a3e63d-bda0-43b1-817b-5f294f52cdd8",
+		"_postman_id": "1072c73c-c418-41cc-8683-ddd1bf3849d5",
 		"name": "Home library",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18339158"
@@ -19,7 +19,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"login\": \"Peter\",\r\n  \"password\": \"repet_psw\"\r\n}",
+									"raw": "{\r\n  \"login\": \"Peter Pan\",\r\n  \"password\": \"repet_psw\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -47,7 +47,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"login\": \"John\",\r\n  \"password\": \"nohJ_psw\"\r\n}",
+									"raw": "{\r\n  \"login\": \"John Dow\",\r\n  \"password\": \"nohJ_psw\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -75,7 +75,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "",
+									"raw": "{\r\n  \"login\": \"Sceleton\",\r\n  \"password\": \"notelecS_psw\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -103,7 +103,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "",
+									"raw": "{\r\n  \"login\": \"Valkirya\",\r\n  \"password\": \"airiclaV_psw\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -206,11 +206,11 @@
 				{
 					"name": "Update user",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"login\": \"Valkiria\",\r\n  \"password\": \"airiklaV_psw\"\r\n}",
+							"raw": "{\r\n  \"oldPassword\": \"airiclaV_psw\",\r\n  \"newPassword\": \"new_airiklaV_psw\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -218,14 +218,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/user/fb5683d2-7fc4-4d0b-a3c5-25c0cd275c4b",
+							"raw": "localhost:4000/user/bb38e1bd-792e-49f2-90aa-e1c30f41f876",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
 								"user",
-								"fb5683d2-7fc4-4d0b-a3c5-25c0cd275c4b"
+								"bb38e1bd-792e-49f2-90aa-e1c30f41f876"
 							]
 						}
 					},
@@ -237,14 +237,578 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/user/5103c0df-cfb7-4d24-826a-1834c122bb52",
+							"raw": "localhost:4000/user/34ab10ba-a5ff-4e8e-9d48-5ae046b1d6a5",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
 								"user",
-								"5103c0df-cfb7-4d24-826a-1834c122bb52"
+								"34ab10ba-a5ff-4e8e-9d48-5ae046b1d6a5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Album",
+			"item": [
+				{
+					"name": "Add 4 albums",
+					"item": [
+						{
+							"name": "Add new album 2020",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Songs 2020\",\r\n  \"year\": 2020,\r\n  \"artistId\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/album/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"album",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new album 2021",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Happy NY 2020\",\r\n  \"year\": 2020,\r\n  \"artistId\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/album/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"album",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new album 2022",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Dance 2022\",\r\n  \"year\": 2022,\r\n  \"artistId\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/album/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"album",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all albums",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/album/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"album",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get album by id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/album/8f535bb4-08e2-4faa-a17d-bb0587e61bcb",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"album",
+								"8f535bb4-08e2-4faa-a17d-bb0587e61bcb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update album",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Spring+Summaer 2019\",\r\n  \"year\": 2019,\r\n  \"artistId\":null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/album/8f535bb4-08e2-4faa-a17d-bb0587e61bcb",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"album",
+								"8f535bb4-08e2-4faa-a17d-bb0587e61bcb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete album",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/album/8f535bb4-08e2-4faa-a17d-bb0587e61bcb",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"album",
+								"8f535bb4-08e2-4faa-a17d-bb0587e61bcb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Artist",
+			"item": [
+				{
+					"name": "Add 4 artists",
+					"item": [
+						{
+							"name": "Add artist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"name\": \"Morgan Wallen\",\r\n  \"grammy\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/artist/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"artist",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add artist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"name\": \"Harry Styles\",\r\n  \"grammy\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/artist/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"artist",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add artist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"name\": \"Stevie Wonder\",\r\n  \"grammy\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/artist/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"artist",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all artists",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/artist/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"artist",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get  artist by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/artist/63402c7b-6cbe-451d-8d7b-84429d226c3e",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"artist",
+								"63402c7b-6cbe-451d-8d7b-84429d226c3e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change artist",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\": \"New Artist name\",\r\n  \"grammy\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/artist/63402c7b-6cbe-451d-8d7b-84429d226c3e",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"artist",
+								"63402c7b-6cbe-451d-8d7b-84429d226c3e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tracks",
+			"item": [
+				{
+					"name": "Get all tracks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/track/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"track",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get track bi Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/track/31697360-b77f-4048-8390-43874981777c",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"track",
+								"31697360-b77f-4048-8390-43874981777c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete track",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/track/4dd555e9-2beb-47b4-9688-58f450edffc3",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"track",
+								"4dd555e9-2beb-47b4-9688-58f450edffc3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add track",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Track name\",\r\n  \"duration\": 120\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/track/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"track",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update track",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"New Track name\",\r\n  \"duration\": 150\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/track/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"track",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favorites",
+			"item": [
+				{
+					"name": "Get all favs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add ttrack to favs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/track/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								"track",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add artist to favs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/artist/304d6889-a92f-4c4c-ab47-09162348e6f0",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								"artist",
+								"304d6889-a92f-4c4c-ab47-09162348e6f0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add album to favs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/album/1c3bd68b-2312-4cd0-a446-e6f0b1e9ddd7",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								"album",
+								"1c3bd68b-2312-4cd0-a446-e6f0b1e9ddd7"
 							]
 						}
 					},

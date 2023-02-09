@@ -4,7 +4,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { DB } from '../DataBase/database';
 
-// type userDto = CreateUserDto | UpdateUserDto;
 @Injectable()
 export class UserService {
   create(createUserDto: CreateUserDto) {
@@ -21,7 +20,6 @@ export class UserService {
   }
 
   findAll() {
-    // return DB.users;
     return DB.users.map((user) => {
       const { password, ...rest } = user;
       return rest;

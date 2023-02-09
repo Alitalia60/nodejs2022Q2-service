@@ -73,7 +73,7 @@ export class TrackController {
   @Delete(':id')
   @ApiOperation({ summary: 'Delete track with specified id' })
   @ApiParam({ name: 'id', required: true, description: 'track`s id (UUID)' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Success' })
+  @ApiResponse({ status: HttpStatus.NO_CONTENT, description: 'Success' })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'Track with id not found',

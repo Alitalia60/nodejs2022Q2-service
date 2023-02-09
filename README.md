@@ -70,3 +70,11 @@ npm run format
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+---
+
+2. REST service: Containerization, Docker
+
+```
+docker-compose up db nestjs
+```

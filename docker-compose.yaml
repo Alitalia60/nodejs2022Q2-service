@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    container_name: db_postgres
+    container_name: database
     image: postgres:15-alpine
     build: ./src/DataBase
     restart: always
@@ -14,12 +14,22 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    networks:
+      - rest_bridge
 
   nestjs:
-    container_name: rest-service
+    container_name: backend
+    image: nestjs_app
     build: ./
     depends_on:
       - db
     ports:
       - ${PORT}:${PORT}
     restart: unless-stopped
+    networks:
+      - rest_bridge
+
+networks:
+  rest_bridge:
+    driver: bridge
+    external: true

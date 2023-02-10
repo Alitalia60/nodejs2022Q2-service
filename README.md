@@ -76,5 +76,6 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 2. REST service: Containerization, Docker
 
 ```
-docker-compose up db nestjs
+docker-compose build
+docker-compose up
 ```

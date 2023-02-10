@@ -73,9 +73,11 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 
 ---
 
-2. REST service: Containerization, Docker
+## 2. REST service: Containerization, Docker
 
 ```
 docker-compose build
 docker-compose up
 ```
+
+## 3. REST service: Containerization, Docker and Database & ORM

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DB, favoritsDB } from '../DataBase/database';
+import { DB } from '../DataBase/database';
 import { HttpException } from '@nestjs/common/exceptions';
 import { HttpStatus } from '@nestjs/common/enums';
 import { FavoritesResponse } from './entities/favorite.entity';
@@ -12,15 +12,15 @@ export class FavoritesService {
       albums: [],
       tracks: [],
     };
-    favoritsDB.albums.forEach((record) => {
+    DB.favorites.albums.forEach((record) => {
       const album = DB.albums.find((item) => item.id === record);
       favsResponse.albums.push(album);
     });
-    favoritsDB.tracks.forEach((record) => {
+    DB.favorites.tracks.forEach((record) => {
       const track = DB.tracks.find((item) => item.id === record);
       favsResponse.tracks.push(track);
     });
-    favoritsDB.artists.forEach((record) => {
+    DB.favorites.artists.forEach((record) => {
       const artist = DB.artists.find((item) => item.id === record);
       favsResponse.artists.push(artist);
     });
@@ -29,7 +29,7 @@ export class FavoritesService {
 
   removeItemFromFavs(itemName = '', id: string) {
     const fullItemNAme = `${itemName}s`;
-    const item = favoritsDB[fullItemNAme].find(
+    const item = DB.favorites[fullItemNAme].find(
       (trackId: string) => trackId === id,
     );
     if (!item) {
@@ -38,7 +38,7 @@ export class FavoritesService {
         HttpStatus.NOT_FOUND,
       );
     }
-    favoritsDB[fullItemNAme] = favoritsDB[fullItemNAme].filter(
+    DB.favorites[fullItemNAme] = DB.favorites[fullItemNAme].filter(
       (record: string) => record !== id,
     );
   }
@@ -53,8 +53,8 @@ export class FavoritesService {
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     }
-    if (!favoritsDB[fullItemNAme].includes(id)) {
-      favoritsDB[fullItemNAme].push(id);
+    if (!DB.favorites[fullItemNAme].includes(id)) {
+      DB.favorites[fullItemNAme].push(id);
     }
   }
 }

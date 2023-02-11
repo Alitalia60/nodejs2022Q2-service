@@ -2,13 +2,18 @@ import { User } from '../user/entities/user.entity';
 import { Artist } from '../artist/entities/artist.entity';
 import { Album } from '../album/entities/album.entity';
 import { Track } from '../track/entities/track.entity';
-import { Favorites } from '../favorites/entities/favorite.entity';
+// import { Favorites } from '../favorites/entities/favorite.entity';
 
 type TDBase = {
   users: User[];
   artists: Artist[];
   tracks: Track[];
   albums: Album[];
+  favorites: {
+    artists: string[];
+    albums: string[];
+    tracks: string[];
+  };
 };
 
 export const DB: TDBase = {
@@ -16,10 +21,9 @@ export const DB: TDBase = {
   artists: [],
   tracks: [],
   albums: [],
-};
-
-export const favoritsDB: Favorites = {
-  artists: [],
-  albums: [],
-  tracks: [],
+  favorites: {
+    artists: [],
+    albums: [],
+    tracks: [],
+  },
 };

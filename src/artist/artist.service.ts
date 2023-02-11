@@ -2,7 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { v4 as uuidv4 } from 'uuid';
-import { DB, favoritsDB } from 'src/DataBase/database';
+import { DB } from 'src/DataBase/database';
 
 @Injectable()
 export class ArtistService {
@@ -44,7 +44,7 @@ export class ArtistService {
     }
     DB.artists = DB.artists.filter((item) => item.id !== id);
 
-    favoritsDB.artists = favoritsDB.artists.filter(
+    DB.favorites.artists = DB.favorites.artists.filter(
       (artistId) => artistId !== id,
     );
     DB.tracks.forEach((track) => {

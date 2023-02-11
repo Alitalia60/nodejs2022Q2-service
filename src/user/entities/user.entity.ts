@@ -1,22 +1,22 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+// import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+// @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  // @PrimaryGeneratedColumn()
   id?: string; // uuid v4
 
-  @Column()
+  // @Column()
   login: string;
 
-  @Column()
+  // @Column()
   password: string;
 
-  @Column()
+  // @Column()
   version?: number; // integer number, increments on update
 
-  @Column()
+  // @Column()
   createdAt?: number; // timestamp of creation
 
-  @Column()
+  // @Column()
   updatedAt?: number; // timestamp of last update
 }

@@ -1,5 +1,5 @@
 FROM node:18-alpine
-WORKDIR /rest/app
+WORKDIR /app
 COPY package*.json .
 RUN npm i
 COPY . .

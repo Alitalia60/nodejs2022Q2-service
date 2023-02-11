@@ -32,4 +32,4 @@ services:
 networks:
   rest_bridge:
     driver: bridge
-    external: true
+    # external: true

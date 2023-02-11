@@ -1,22 +1,28 @@
-// import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-// @Entity()
+@Entity()
 export class User {
-  // @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id?: string; // uuid v4
 
-  // @Column()
+  @Column()
   login: string;
 
-  // @Column()
+  @Column()
   password: string;
 
-  // @Column()
+  @Column()
   version?: number; // integer number, increments on update
 
   // @Column()
-  createdAt?: number; // timestamp of creation
+  // createdAt?: number; // timestamp of creation
 
   // @Column()
-  updatedAt?: number; // timestamp of last update
+  // updatedAt?: number; // timestamp of last update
+
+  toResponse() {
+    // const { id, login, version, createdAt, updatedAt } = this;
+    const { id, login, version } = this;
+    return { id, login, version };
+  }
 }

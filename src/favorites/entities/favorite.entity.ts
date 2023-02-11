@@ -2,10 +2,14 @@ import { Artist } from '../../artist/entities/artist.entity';
 import { Album } from '../../album/entities/album.entity';
 import { Track } from '../../track/entities/track.entity';
 // export interface Favorites {
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Favorites {
+
+  @PrimaryColumn()
+  id?: string; // favorite artists ids
+
   @Column()
   artists: string[]; // favorite artists ids
 

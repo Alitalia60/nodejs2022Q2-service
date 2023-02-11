@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
-import { DB, favoritsDB } from '../DataBase/database';
+import { DB } from '../DataBase/database';
 import { v4 as uuidv4 } from 'uuid';
 import { Track } from './entities/track.entity';
 import { InjectRepository } from '@nestjs/typeorm';

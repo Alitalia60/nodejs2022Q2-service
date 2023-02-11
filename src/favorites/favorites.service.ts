@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DB, favoritsDB } from '../DataBase/database';
+import { DB } from '../DataBase/database';
 import { HttpException } from '@nestjs/common/exceptions';
 import { HttpStatus } from '@nestjs/common/enums';
 import { Favorites, FavoritesResponse } from './entities/favorite.entity';

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
 
 @Entity()
 export class User {
@@ -14,11 +14,11 @@ export class User {
   @Column()
   version?: number; // integer number, increments on update
 
-  // @Column()
-  // createdAt?: number; // timestamp of creation
+  @Column()
+  createdAt?: number; // timestamp of creation
 
-  // @Column()
-  // updatedAt?: number; // timestamp of last update
+  @Column()
+  updatedAt?: number; // timestamp of last update
 
   toResponse() {
     // const { id, login, version, createdAt, updatedAt } = this;

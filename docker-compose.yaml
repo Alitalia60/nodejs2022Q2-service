@@ -37,8 +37,3 @@ networks:
   rest_bridge:
     driver: bridge
     # external: true
-# configs:
-#   database_cofig:
-#     file: './DockerConfigs/database-сonfig.txt'
-#   backend_config:
-#     file: './DockerConfigs/backend-config.txt'

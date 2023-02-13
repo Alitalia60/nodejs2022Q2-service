@@ -9,11 +9,12 @@ type TDBase = {
   artists: Artist[];
   tracks: Track[];
   albums: Album[];
-  favorites: {
-    artists: string[];
-    albums: string[];
-    tracks: string[];
-  };
+  // favorites: Favorites;
+  // favorites: Favorites {
+  //   artists: string[];
+  //   tracks: string[];
+  //   albums: string[];
+  // };
 };
 
 export const DB: TDBase = {
@@ -21,9 +22,9 @@ export const DB: TDBase = {
   artists: [],
   tracks: [],
   albums: [],
-  favorites: {
-    artists: [],
-    albums: [],
-    tracks: [],
-  },
+  // favorites: {
+  //   artists: [],
+  //   albums: [],
+  //   tracks: [],
+  // },
 };

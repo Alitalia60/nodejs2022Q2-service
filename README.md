@@ -75,7 +75,29 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 
 2. REST service: Containerization, Docker
 
+run follow conmmands:
+
+#### 1.
+
 ```
-docker-compose build
-docker-compose up
+docker network create \
+
+--driver=bridge \
+
+--subnet=172.19.0.0/16 \
+
+--ip-range=172.19.3.0/24 \
+
+--ip-gateway=172.19.3.254 \
+
+rest_bridge
+
 ```
+
+### 2.
+
+    `docker-compose build`
+
+### 3.
+
+    `docker-compose up`

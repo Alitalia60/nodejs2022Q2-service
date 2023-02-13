@@ -1,0 +1,8 @@
+    build: ./
+    depends_on:
+      - database
+    ports:
+      - ${PORT}:${PORT}
+    restart: unless-stopped
+    networks:
+      - rest_bridge

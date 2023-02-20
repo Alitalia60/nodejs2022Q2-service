@@ -4,28 +4,14 @@ services:
   database:
     container_name: pg_database
     image: postgres:15-alpine
-    # configs:
-    #   - database_cofig
-    build: ./
-    depends_on:
-      - database
-    ports:
-      - ${PORT}:${PORT}
-    restart: unless-stopped
-    networks:
-      - rest_bridge
-
-  nestjs_api:
-    container_name: backend
-    image: backend_app:v-1.0
-    # configs:
-    #   - backend_config
     build: ./src/DataBase
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      TIMEZONE: ${TIMEZONE}
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256 --auth-local=scram-sha-256
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     ports:
@@ -33,7 +19,20 @@ services:
     networks:
       - rest_bridge
 
+  nestjs_api:
+    container_name: backend
+    image: backend_app:v-1.0
+    build: ./
+    environment:
+      TZ: ${TIMEZONE}
+    depends_on:
+      - database
+    ports:
+      - ${PORT}:${PORT}
+    restart: unless-stopped
+    networks:
+      - rest_bridge
 networks:
   rest_bridge:
     driver: bridge
-    # external: true
+# external: true

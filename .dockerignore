@@ -3,3 +3,5 @@ node_modules
 *.log
 pgdata
 postman
+.docker-compose
+todo.md

@@ -1,9 +1,18 @@
 // export interface Artist {
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+} from 'typeorm';
+import { Album } from '../../album/entities/album.entity';
+import { Track } from '../../track/entities/track.entity';
+import { Favorites } from '../../favorites/entities/favorite.entity';
 
 @Entity()
 export class Artist {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
@@ -11,4 +20,20 @@ export class Artist {
 
   @Column()
   grammy: boolean;
+
+  @OneToMany(() => Album, (album) => album.artist, {
+    cascade: ['remove'],
+    onDelete: 'SET NULL',
+  })
+  albums: Album[];
+
+  @OneToMany(() => Track, (track) => track.artist, {
+    cascade: ['remove'],
+    onDelete: 'SET NULL',
+  })
+  tracks: Track[];
+
+  @ManyToMany(() => Favorites, (favorites) => favorites.artists)
+  // artists: Artist[];
+  favorites: Favorites[];
 }

@@ -1,109 +1,108 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
-import { DB } from '../DataBase/database';
-import { v4 as uuidv4 } from 'uuid';
 import { Track } from './entities/track.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Artist } from '../artist/entities/artist.entity';
+import { Album } from '../album/entities/album.entity';
 
 @Injectable()
 export class TrackService {
   constructor(
     @InjectRepository(Track)
     private trackRepository: Repository<Track>,
+
+    @InjectRepository(Album)
+    private albumRepository: Repository<Album>,
+
+    @InjectRepository(Artist)
+    private artistRepository: Repository<Artist>,
   ) { }
-  create(createTrackDto: CreateTrackDto) {
-    return this.trackRepository.create(createTrackDto);
+
+  async create(createTrackDto: CreateTrackDto) {
+    const track = new Track();
+
+    if (createTrackDto.artistId) {
+      const artist = await this.artistRepository.findOneBy({
+        id: createTrackDto.artistId,
+      });
+      if (!artist) {
+        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+      }
+      track.artist = artist;
+    }
+
+    if (createTrackDto.albumId) {
+      const album = await this.albumRepository.findOneBy({
+        id: createTrackDto.albumId,
+      });
+      if (!album) {
+        throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
+      }
+      track.album = album;
+    }
+
+    Object.assign(track, {
+      name: createTrackDto.name,
+      duration: createTrackDto.duration,
+    });
+    return (await this.trackRepository.save(track)).toResponse();
   }
 
-  findAll() {
-    return this.trackRepository.find();
+  async findAll() {
+    return await this.trackRepository.find({
+      relations: {
+        artist: true,
+        album: true,
+      },
+    });
   }
 
-  findOne(id: string) {
-    return this.trackRepository.findOneBy({ id });
+  async findOne(id: string) {
+    const track = await this.trackRepository.findOneBy({ id: id });
+    if (!track) {
+      throw new HttpException('Track not found', HttpStatus.NOT_FOUND);
+    }
+    return track.toResponse();
   }
 
-  update(id: string, updateTrackDto: UpdateTrackDto) {
-    return `update id: ${id}, dto: ${updateTrackDto}`;
+  async update(id: string, updateTrackDto: UpdateTrackDto) {
+    const track = await this.trackRepository.findOneBy({ id: id });
+    if (!track) {
+      throw new HttpException('Track not found', HttpStatus.NOT_FOUND);
+    }
+
+    if (updateTrackDto.artistId) {
+      const artist = await this.artistRepository.findOneBy({
+        id: updateTrackDto.artistId,
+      });
+      if (!artist) {
+        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+      }
+      track.artist = artist;
+    }
+    if (updateTrackDto.albumId) {
+      const album = await this.albumRepository.findOneBy({
+        id: updateTrackDto.albumId,
+      });
+      if (!album) {
+        throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
+      }
+      track.album = album;
+    }
+    Object.assign(track, {
+      name: updateTrackDto.name,
+      duration: updateTrackDto.duration,
+    });
+
+    return (await this.trackRepository.save(track)).toResponse();
   }
 
-  remove(id: string) {
-    return `delete ${id}`;
+  async remove(id: string) {
+    const result = await this.trackRepository.delete({ id: id });
+    if (result.affected === 0) {
+      throw new HttpException('Track not found', HttpStatus.NOT_FOUND);
+    }
   }
-
-  // create(createTrackDto: CreateTrackDto) {
-  //   const { artistId, albumId } = createTrackDto;
-
-  //   if (artistId) {
-  //     const artist = DB.artists.find((item) => item.id === artistId);
-  //     if (!artist) {
-  //       throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
-  //     }
-  //   }
-
-  //   if (albumId) {
-  //     const album = DB.albums.find((item) => item.id === albumId);
-  //     if (!album) {
-  //       throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
-  //     }
-  //   }
-
-  //   const item: Track = {
-  //     id: uuidv4(),
-  //     artistId: !artistId ? null : artistId,
-  //     albumId: !albumId ? null : albumId,
-  //     ...createTrackDto,
-  //   };
-  //   DB.tracks.push(item);
-  //   return item;
-  // }
-
-  // findAll() {
-  //   return DB.tracks;
-  // }
-
-  // findOne(id: string) {
-  //   const item = DB.tracks.find((item) => item.id === id);
-
-  //   if (!item) {
-  //     throw new HttpException('Track not found', HttpStatus.NOT_FOUND);
-  //   }
-  //   return item;
-  // }
-
-  // update(id: string, updateTrackDto: UpdateTrackDto) {
-  //   const index = DB.tracks.findIndex((item) => item.id === id);
-  //   if (index < 0) {
-  //     throw new HttpException('Track not found', HttpStatus.NOT_FOUND);
-  //   }
-  //   const { artistId, albumId } = updateTrackDto;
-  //   if (artistId) {
-  //     const artist = DB.artists.find((item) => item.id === artistId);
-  //     if (!artist) {
-  //       throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
-  //     }
-  //   }
-
-  //   if (albumId) {
-  //     const album = DB.albums.find((item) => item.id === albumId);
-  //     if (!album) {
-  //       throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
-  //     }
-  //   }
-
-  //   const itemData = { id: DB.tracks[index].id, ...updateTrackDto };
-  //   Object.assign(DB.tracks[index], itemData);
-  //   return DB.tracks[index];
-  // }
-
-  // remove(id: string) {
-  //   const item = DB.tracks.find((item) => item.id === id);
-  //   if (!item) {
-  //     throw new HttpException('Track not found', HttpStatus.NOT_FOUND);
-  //   }
-  //   DB.tracks = DB.tracks.filter((item) => item.id !== id);
-  //   favoritsDB.tracks = favoritsDB.tracks.filter((trackId) => trackId !== id);
-  // }
 }

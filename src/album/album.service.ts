@@ -1,97 +1,88 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
-import { v4 as uuidv4 } from 'uuid';
-import { DB } from 'src/DataBase/database';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Album } from './entities/album.entity';
 import { Repository } from 'typeorm';
+import { Artist } from '../artist/entities/artist.entity';
 
 @Injectable()
 export class AlbumService {
   constructor(
     @InjectRepository(Album)
     private albumRepository: Repository<Album>,
+
+    @InjectRepository(Artist)
+    private artistRepository: Repository<Artist>,
   ) { }
 
-  create(createAlbumDto: CreateAlbumDto) {
-    return this.albumRepository.create(createAlbumDto);
+  async create(createAlbumDto: CreateAlbumDto) {
+    const album = new Album();
+
+    if (createAlbumDto.artistId) {
+      const artist = await this.artistRepository.findOneBy({
+        id: createAlbumDto.artistId,
+      });
+      if (!artist) {
+        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+      }
+      album.artist = artist;
+    }
+
+    Object.assign(album, {
+      name: createAlbumDto.name,
+      year: createAlbumDto.year,
+    });
+    return (await this.albumRepository.save(album)).toResponse();
   }
 
-  findAll() {
-    return this.albumRepository.find();
+  async findAll() {
+    return await this.albumRepository.query(
+      'SELECT \
+      album.id, album.name, album.year, artist.id \
+      AS artistId FROM album \
+      LEFT OUTER JOIN artist ON artist.id = album."artistId"',
+    );
   }
 
-  findOne(id: string) {
-    return this.albumRepository.findOneBy({ id });
+  async findOne(id: string) {
+    const album = await this.albumRepository.query(
+      `SELECT \
+      album.id, album.name, album.year, artist.id \
+      AS artistId FROM album \
+      LEFT OUTER JOIN artist ON artist.id = album."artistId" \
+      WHERE album."id" = '${id}'`,
+    );
+    if (!album[0]) {
+      throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
+    }
+    return album[0];
   }
 
-  update(id: string, updateAlbumDto: UpdateAlbumDto) {
-    return `update id: ${id}, dto: ${updateAlbumDto}`;
+  async update(id: string, updateAlbumDto: UpdateAlbumDto) {
+    const album = await this.albumRepository.findOneBy({ id: id });
+    if (!album) {
+      throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
+    }
+
+    if (updateAlbumDto.artistId) {
+      const artist = await this.artistRepository.findOneBy({
+        id: updateAlbumDto.artistId,
+      });
+      if (!artist) {
+        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+      }
+      album.artist = artist;
+    }
+
+    Object.assign(album, updateAlbumDto);
+    return (await this.albumRepository.save(album)).toResponse();
   }
 
-  remove(id: string) {
-    return `delete ${id}`;
+  async remove(id: string) {
+    const result = await this.albumRepository.delete({ id: id });
+    if (result.affected === 0) {
+      throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
+    }
   }
-
-  // create(createAlbumDto: CreateAlbumDto) {
-  //   const { artistId } = createAlbumDto;
-  //   if (artistId) {
-  //     const artist = DB.artists.find((item) => item.id === artistId);
-  //     if (!artist) {
-  //       throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
-  //     }
-  //   }
-
-  //   const item = {
-  //     id: uuidv4(),
-  //     artistId: !artistId ? null : artistId,
-  //     ...createAlbumDto,
-  //   };
-  //   DB.albums.push(item);
-  //   return item;
-  // }
-
-  // findAll() {
-  //   return DB.albums;
-  // }
-
-  // findOne(id: string) {
-  //   const item = DB.albums.find((item) => item.id === id);
-  //   if (!item) {
-  //     throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
-  //   }
-  //   return item;
-  // }
-
-  // update(id: string, updateAlbumDto: UpdateAlbumDto) {
-  //   const index = DB.albums.findIndex((item) => item.id === id);
-  //   if (index < 0) {
-  //     throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
-  //   }
-  //   const { artistId } = updateAlbumDto;
-  //   if (artistId) {
-  //     const artist = DB.artists.find((item) => item.id === artistId);
-  //     if (!artist) {
-  //       throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
-  //     }
-  //   }
-
-  //   const itemData = { id: DB.albums[index].id, ...updateAlbumDto };
-  //   Object.assign(DB.albums[index], itemData);
-  //   return DB.albums[index];
-  // }
-
-  // remove(id: string) {
-  //   const item = DB.albums.find((item) => item.id === id);
-  //   if (!item) {
-  //     throw new HttpException('Albums not found', HttpStatus.NOT_FOUND);
-  //   }
-  //   DB.albums = DB.albums.filter((item) => item.id !== id);
-
-  //   favoritsDB.albums = favoritsDB.albums.filter((albumId) => albumId !== id);
-  //   DB.tracks.forEach((track) => {
-  //     track.albumId = track.albumId === id ? null : track.albumId;
-  //   });
-  // }
 }

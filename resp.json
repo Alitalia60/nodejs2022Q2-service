@@ -1,0 +1,68 @@
+{
+  "artists": [
+    {
+      "id": "ea2d1b73-928f-4e77-ba18-51264d7edbd5",
+      "name": "TEST_artist",
+      "grammy": true
+    },
+    {
+      "id": "8ae0e4f8-864a-4944-b622-8b835832927c",
+      "name": "TEST_artist",
+      "grammy": true
+    },
+    {
+      "id": "dc588dcf-45fb-4d08-9d84-fd3e67939571",
+      "name": "TEST_artist",
+      "grammy": true
+    },
+    {
+      "id": "4c74419b-e347-4114-8dff-1439879e4bb1",
+      "name": "TEST_artist",
+      "grammy": true
+    }
+  ],
+  "albums": [
+    {
+      "id": "2a7fc342-8029-4cf0-a019-0c203ae6e453",
+      "name": "TEST_ALBUM",
+      "year": 2022
+    },
+    {
+      "id": "9c882cc9-f7fd-4e50-a5b6-3eddad25563c",
+      "name": "TEST_ALBUM",
+      "year": 2022
+    },
+    {
+      "id": "ea062bf3-0ab5-4a5a-9a53-cefe6147dc1a",
+      "name": "TEST_ALBUM",
+      "year": 2022
+    },
+    {
+      "id": "dbbcfc71-67d4-4970-9ba2-8732995ee278",
+      "name": "TEST_ALBUM",
+      "year": 2022
+    }
+  ],
+  "tracks": [
+    {
+      "id": "1b1926ed-4893-4d29-836b-38145e440e7e",
+      "name": "Test track",
+      "duration": 335
+    },
+    {
+      "id": "4a05ff8f-560c-4619-b66e-e40730200e2f",
+      "name": "Test track",
+      "duration": 335
+    },
+    {
+      "id": "e907f286-9ec6-4239-b4c8-9433eb5ef0ea",
+      "name": "Test track",
+      "duration": 335
+    },
+    {
+      "id": "bdbf996a-e051-4bb2-8f4d-e7e55f7d6cd1",
+      "name": "Test track",
+      "duration": 335
+    }
+  ]
+}

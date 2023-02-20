@@ -1,11 +1,10 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
-import { v4 as uuidv4 } from 'uuid';
-import { DB } from 'src/DataBase/database';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Artist } from './entities/artist.entity';
 import { Repository } from 'typeorm';
+import dataSource from '../DataBase/data-source';
 
 @Injectable()
 export class ArtistService {
@@ -14,72 +13,43 @@ export class ArtistService {
     private artistRepository: Repository<Artist>,
   ) { }
 
-  create(createArtistDto: CreateArtistDto) {
-    return this.artistRepository.create(createArtistDto);
+  async create(createArtistDto: CreateArtistDto) {
+    const artist = this.artistRepository.create(createArtistDto);
+    return await this.artistRepository.save(artist);
   }
 
-  findAll() {
-    return this.artistRepository.find();
+  async findAll() {
+    return await this.artistRepository.find();
   }
 
-  findOne(id: string) {
-    return this.artistRepository.findOneBy({ id });
+  async findOne(id: string) {
+    const artist = await this.artistRepository.findOneBy({ id: id });
+    if (!artist) {
+      throw new HttpException('Aкешые not found', HttpStatus.NOT_FOUND);
+    }
+    return artist;
   }
 
-  update(id: string, updateArtistDto: UpdateArtistDto) {
-    return `update id: ${id}, dto: ${updateArtistDto}`;
+  async update(id: string, updateArtistDto: UpdateArtistDto) {
+    const artist = await this.artistRepository.findOneBy({ id: id });
+    if (!artist) {
+      throw new HttpException('Aкешые not found', HttpStatus.NOT_FOUND);
+    }
+    Object.assign(artist, updateArtistDto);
+    return await this.artistRepository.save(artist);
   }
 
-  remove(id: string) {
-    return `delete ${id}`;
+  async remove(id: string) {
+    // await dataSource
+    //   .createQueryBuilder()
+    //   .delete()
+    //   .from(Artist)
+    //   .where('id = :id', { id: id })
+    //   .execute();
+
+    const result = await this.artistRepository.delete({ id: id });
+    if (result.affected === 0) {
+      throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+    }
   }
-
-  // create(createArtistDto: CreateArtistDto) {
-  //   const item = { id: uuidv4(), ...createArtistDto };
-  //   DB.artists.push(item);
-  //   return item;
-  // }
-
-  // findAll() {
-  //   return DB.artists;
-  // }
-
-  // findOne(id: string) {
-  //   const item = DB.artists.find((item) => item.id === id);
-  //   if (!item) {
-  //     throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
-  //   }
-  //   return item;
-  // }
-
-  // update(id: string, updateArtistDto: UpdateArtistDto) {
-  //   const index = DB.artists.findIndex((item) => item.id === id);
-
-  //   if (index < 0) {
-  //     throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
-  //   }
-
-  //   const itemData = { id: DB.artists[index].id, ...updateArtistDto };
-  //   Object.assign(DB.artists[index], itemData);
-  //   return DB.artists[index];
-  //   // return itemData;
-  // }
-
-  // remove(id: string) {
-  //   const item = DB.artists.find((item) => item.id === id);
-  //   if (!item) {
-  //     throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
-  //   }
-  //   DB.artists = DB.artists.filter((item) => item.id !== id);
-
-  //   favoritsDB.artists = favoritsDB.artists.filter(
-  //     (artistId) => artistId !== id,
-  //   );
-  //   DB.tracks.forEach((track) => {
-  //     track.artistId = track.artistId === id ? null : track.artistId;
-  //   });
-  //   DB.albums.forEach((album) => {
-  //     album.artistId = album.artistId === id ? null : album.artistId;
-  //   });
-  // }
 }

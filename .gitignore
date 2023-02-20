@@ -40,3 +40,5 @@ lerna-debug.log*
 
 #docker volumes
 pgdata
+
+todo.md

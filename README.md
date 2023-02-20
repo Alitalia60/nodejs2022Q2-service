@@ -84,3 +84,13 @@ run follow conmmands:
     `docker-compose up --build`
 
 ```
+
+### Migrations
+
+for migration run
+
+```
+    npm run migration:create
+    npm run migration:generate
+    npm run migration:run
+```

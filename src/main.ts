@@ -12,6 +12,8 @@ import { config as dotenvConfig } from 'dotenv';
 dotenvConfig();
 const PORT = Number(process.env.PORT) || 4000;
 
+console.log(process.env.POSTGRES_HOST);
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 

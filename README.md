@@ -77,27 +77,10 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 
 run follow conmmands:
 
-#### 1.
-
-```
-docker network create \
-
---driver=bridge \
-
---subnet=172.19.0.0/16 \
-
---ip-range=172.19.3.0/24 \
-
---ip-gateway=172.19.3.254 \
-
-rest_bridge
-
 ```
 
 ### 2.
 
-    `docker-compose build`
+    `docker-compose up --build`
 
-### 3.
-
-    `docker-compose up`
+```

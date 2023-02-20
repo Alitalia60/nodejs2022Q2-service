@@ -25,6 +25,8 @@ services:
     build: ./
     environment:
       TZ: ${TIMEZONE}
+      POSTGRES_HOST: pg_database
+
     depends_on:
       - database
     ports:

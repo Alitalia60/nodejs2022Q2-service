@@ -11,6 +11,12 @@
 git clone {repository URL}
 ```
 
+## Select branch 'Docker+Postgres'
+
+
+## Create '.env' file or copy it from '.env.example'
+
+
 ## Installing NPM modules
 
 ```

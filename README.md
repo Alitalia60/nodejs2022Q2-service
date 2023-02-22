@@ -13,9 +13,7 @@ git clone {repository URL}
 
 ## Select branch 'Docker+Postgres'
 
-
 ## Create '.env' file or copy it from '.env.example'
-
 
 ## Installing NPM modules
 
@@ -90,6 +88,11 @@ run follow conmmands:
     `docker-compose up --build`
 
 ```
+
+> NOTE
+> to use postgress database in container (without installation on local host)
+> after building images you can run
+> `docker run -d -e "POSTGRES_PASSWORD=root" postgres:15-alpine`
 
 ### Migrations
 

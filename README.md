@@ -13,6 +13,13 @@ git clone {repository URL}
 
 ## Select branch 'Docker+Postgres'
 
+
+set in `data-source.ts` 
+
+   - for docker `synchronize: true`, 
+
+   - for migrations `synchronize: false`, 
+
  Create '.env' file or copy it from '.env.example'
 
 set in `.env`

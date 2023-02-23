@@ -94,11 +94,16 @@ run follow conmmands:
 
 ### 2.
 
-    `docker-compose up --build`
+    `docker-compose up`
+
+or
+
+  `docker-compose up --build`
 
 ```
 
 > NOTE
+> for localhost app running ONLY
 > to use postgress database in container (without installation on local host)
 > after building images you can run
 > `docker run -d -e "POSTGRES_PASSWORD=root" postgres:15-alpine`

@@ -13,7 +13,16 @@ git clone {repository URL}
 
 ## Select branch 'Docker+Postgres'
 
-## Create '.env' file or copy it from '.env.example'
+ Create '.env' file or copy it from '.env.example'
+
+set in `.env`
+
+ `POSTGRES_HOST=pg_database` for run in Docker
+
+or 
+ 
+`POSTGRES_HOST=localhost`  for run at local host  
+
 
 ## Installing NPM modules
 

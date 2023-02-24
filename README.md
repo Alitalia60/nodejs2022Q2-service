@@ -34,7 +34,7 @@ or
 ## Installing NPM modules
 
 ```
-npm install
+npm install pg
 ```
 
 ## Running application

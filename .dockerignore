@@ -1,0 +1,7 @@
+node_modules
+# test
+*.log
+pgdata
+postman
+.docker-compose
+todo.md

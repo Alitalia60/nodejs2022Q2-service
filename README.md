@@ -11,10 +11,30 @@
 git clone {repository URL}
 ```
 
+## Select branch 'Docker+Postgres'
+
+
+set in `data-source.ts` 
+
+   - for docker `synchronize: true`, 
+
+   - for migrations `synchronize: false`, 
+
+ Create '.env' file or copy it from '.env.example'
+
+set in `.env`
+
+ `POSTGRES_HOST=pg_database` for run in Docker
+
+or 
+ 
+`POSTGRES_HOST=localhost`  for run at local host  
+
+
 ## Installing NPM modules
 
 ```
-npm install
+npm install pg
 ```
 
 ## Running application
@@ -70,3 +90,37 @@ npm run format
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+---
+
+2. REST service: Containerization, Docker
+
+run follow conmmands:
+
+```
+
+### 2.
+
+    `docker-compose up`
+
+or
+
+  `docker-compose up --build`
+
+```
+
+> NOTE
+> for localhost app running ONLY
+> to use postgress database in container (without installation on local host)
+> after building images you can run
+> `docker run -d -e "POSTGRES_PASSWORD=root" postgres:15-alpine`
+
+### Migrations
+
+for migration run
+
+```
+    npm run migration:create
+    npm run migration:generate
+    npm run migration:run
+```

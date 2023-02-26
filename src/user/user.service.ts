@@ -1,51 +1,61 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { createHash } from 'node:crypto';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
+// import { LoggingService } from '../loggers/logging.service';
 
 @Injectable()
 export class UserService {
+  private readonly customLogger: Logger;
   constructor(
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
-  ) { }
-
-  async create(createUserDto: CreateUserDto) {
-    const user = await this.userRepository.findOneBy({
-      login: createUserDto.login,
-    });
-
-    if (user) {
-      // throw new HttpException(
-      //   'Login already exists',
-      //   HttpStatus.UNPROCESSABLE_ENTITY,
-      // );
-    }
-
-    const newUser = new User();
-    Object.assign(newUser, createUserDto);
-    return (await this.userRepository.save(newUser)).toResponse();
+    @InjectRepository(User) private userRepository: Repository<User>,
+  ) {
+    this.customLogger = new Logger('User');
   }
+
+  //!! -------------------------------
+  async create(createUserDto: CreateUserDto) {
+    console.log('UserService.create, createUserDto: ', createUserDto);
+    // this.customLogger.log(`Create user: ${createUserDto}`);
+
+    const { login, password } = createUserDto;
+    const newUser = new User();
+    newUser.password = this.hashPassword(password);
+    newUser.login = login;
+    return await this.userRepository.save(newUser);
+  }
+
+  //!! -------------------------------
 
   async findAll() {
     return await this.userRepository
       .createQueryBuilder('user')
-      .select(['user.id', 'user.login'])
+      .select(['user.id', 'user.login', 'user.password'])
       .getMany();
   }
 
+  //!! -------------------------------
   async findOne(id: string) {
-    const user = await this.userRepository.findOneBy({ id: id });
+    const user = await this.userRepository.findOneBy({ id });
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
-    return user.toResponse();
+    return user;
   }
 
+  //!! -------------------------------
+  async findByLogin(login: string) {
+    const user = await this.userRepository.findOne({ where: { login } });
+    if (!user) return null;
+    return user;
+  }
+
+  //!! -------------------------------
   async update(id: string, updateUserDto: UpdateUserDto) {
-    const user = await this.userRepository.findOneBy({ id: id });
+    const user = await this.userRepository.findOneBy({ id });
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
@@ -58,13 +68,20 @@ export class UserService {
       password: updateUserDto.newPassword,
     });
 
-    return (await this.userRepository.save(user)).toResponse();
+    // return (await this.userRepository.save(user)).toResponse();
+    return await this.userRepository.save(user);
   }
 
+  //!! -------------------------------
   async remove(id: string) {
-    const result = await this.userRepository.delete({ id: id });
+    const result = await this.userRepository.delete({ id });
     if (result.affected === 0) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
+  }
+
+  //!! ------------------------------------
+  hashPassword(pass: string) {
+    return createHash('sha256').update(pass).digest('hex');
   }
 }

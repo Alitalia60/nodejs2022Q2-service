@@ -18,7 +18,8 @@ export const dataSourseConfig: DataSourceOptions = {
   password: process.env.POSTGRES_PASSWORD || 'root',
   database: process.env.POSTGRES_DB || 'alita_db',
   entities: [User, Track, Artist, Album, Favorites],
-  synchronize: false,
+  synchronize: true,
+  // synchronize: false,
   logging: 'all',
   logger: 'file',
 };

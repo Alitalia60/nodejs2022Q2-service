@@ -14,4 +14,5 @@ ENV POSTGRES_PORT=${POSTGRES_PORT}
 ENV TZ=${TIMEZONE}
 
 
-CMD [ "npm","start" ]
+# CMD [ "npm","start" ]
+CMD [ "npm","run", "start:dev" ]

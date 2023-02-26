@@ -27,17 +27,17 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date; // timestamp of last update
 
-  toResponse() {
-    // const { id, login, version, createdAt, updatedAt } = this;
-    const { id, login, version } = this;
-    const createdAtAsNumber = new Date(this.createdAt).getTime();
-    const updatedAtAsNumber = new Date(this.updatedAt).getTime();
-    return {
-      id: id,
-      login: login,
-      version: version,
-      createdAt: createdAtAsNumber,
-      updatedAt: updatedAtAsNumber,
-    };
-  }
+  // toResponse() {
+  //   // const { id, login, version, createdAt, updatedAt } = this;
+  //   const { id, login, version } = this;
+  //   const createdAtAsNumber = new Date(this.createdAt).getTime();
+  //   const updatedAtAsNumber = new Date(this.updatedAt).getTime();
+  //   return {
+  //     id: id,
+  //     login: login,
+  //     version: version,
+  //     createdAt: createdAtAsNumber,
+  //     updatedAt: updatedAtAsNumber,
+  //   };
+  // }
 }

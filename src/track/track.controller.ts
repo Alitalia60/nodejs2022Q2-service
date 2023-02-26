@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
 import { TrackService } from './track.service';
 import { CreateTrackDto } from './dto/create-track.dto';
@@ -14,7 +15,10 @@ import { UpdateTrackDto } from './dto/update-track.dto';
 import { ParseUUIDPipe } from '@nestjs/common/pipes';
 import { HttpStatus } from '@nestjs/common/enums';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
+//!! -------------------------------------------------
+@UseGuards(JwtAuthGuard)
 @ApiTags('track')
 @Controller('track')
 export class TrackController {
@@ -27,6 +31,7 @@ export class TrackController {
     return this.trackService.findAll();
   }
 
+  //!! -------------------------------------------------
   @Get(':id')
   @ApiOperation({ summary: 'Find track with specified id' })
   @ApiParam({ name: 'id', required: true, description: 'track`s id (UUID)' })
@@ -40,6 +45,7 @@ export class TrackController {
     return this.trackService.findOne(id);
   }
 
+  //!! -------------------------------------------------
   @Post()
   @ApiOperation({ summary: 'Add new track' })
   @ApiResponse({ status: HttpStatus.CREATED, description: 'Created' })
@@ -51,6 +57,7 @@ export class TrackController {
     return this.trackService.create(createTrackDto);
   }
 
+  //!! -------------------------------------------------
   @Put(':id')
   @ApiOperation({ summary: 'Change track with specified id' })
   @ApiParam({ name: 'id', required: true, description: 'track`s id (UUID)' })
@@ -70,6 +77,7 @@ export class TrackController {
     return this.trackService.update(id, updateTrackDto);
   }
 
+  //!! -------------------------------------------------
   @Delete(':id')
   @ApiOperation({ summary: 'Delete track with specified id' })
   @ApiParam({ name: 'id', required: true, description: 'track`s id (UUID)' })

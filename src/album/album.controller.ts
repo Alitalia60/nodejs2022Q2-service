@@ -1,16 +1,19 @@
 /* eslint-disable prettier/prettier */
-import { Put, Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import { Put, Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 import { AlbumService } from './album.service';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { ParseUUIDPipe } from '@nestjs/common/pipes';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('album')
+@UseGuards(JwtAuthGuard)
 @Controller('album')
 export class AlbumController {
   constructor(private readonly albumService: AlbumService) { }
 
+  //!! -------------------------------------------------
   @Get()
   @ApiOperation({ summary: 'List all albums' })
   @ApiResponse({ status: HttpStatus.OK, description: 'Success' })
@@ -18,6 +21,7 @@ export class AlbumController {
     return this.albumService.findAll();
   }
 
+  //!! -------------------------------------------------
   @Get(':id')
   @ApiOperation({ summary: 'Find album with specified id' })
   @ApiParam({ name: 'id', required: true, description: 'Album`s id (UUID)' })
@@ -31,6 +35,7 @@ export class AlbumController {
     return this.albumService.findOne(id);
   }
 
+  //!! -------------------------------------------------
   @Post()
   @ApiOperation({ summary: 'Add new album' })
   @ApiResponse({ status: HttpStatus.CREATED, description: 'Created' })
@@ -42,6 +47,7 @@ export class AlbumController {
     return this.albumService.create(createAlbumDto);
   }
 
+  //!! -------------------------------------------------
   @Put(':id')
   @ApiOperation({ summary: 'Change album with specified id' })
   @ApiParam({ name: 'id', required: true, description: 'Album`s id (UUID)' })
@@ -59,6 +65,7 @@ export class AlbumController {
     return this.albumService.update(id, updateAlbumDto);
   }
 
+  //!! -------------------------------------------------
   @Delete(':id')
   @ApiOperation({ summary: 'Delete album with specified id' })
   @ApiParam({ name: 'id', required: true, description: 'Album`s id (UUID)' })

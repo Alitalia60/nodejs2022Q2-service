@@ -9,17 +9,22 @@ import {
   ParseUUIDPipe,
   HttpCode,
   HttpStatus,
+  UseGuards,
+
 } from '@nestjs/common';
 import { ArtistService } from './artist.service';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('artist')
+@UseGuards(JwtAuthGuard)
 @Controller('artist')
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) { }
 
+  //!! -------------------------------------------------
   @Get()
   @ApiOperation({ summary: 'List all artists' })
   @ApiResponse({ status: HttpStatus.OK, description: 'Success' })
@@ -27,6 +32,7 @@ export class ArtistController {
     return this.artistService.findAll();
   }
 
+  //!! -------------------------------------------------
   @Get(':id')
   @ApiOperation({ summary: 'Find artist with specified id' })
   @ApiParam({ name: 'id', required: true, description: 'Artist`s id' })
@@ -40,6 +46,7 @@ export class ArtistController {
     return this.artistService.findOne(id);
   }
 
+  //!! -------------------------------------------------
   @Post()
   @ApiOperation({ summary: 'Add new artist' })
   @ApiResponse({ status: HttpStatus.CREATED, description: 'Created' })
@@ -51,6 +58,7 @@ export class ArtistController {
     return this.artistService.create(createArtistDto);
   }
 
+  //!! -------------------------------------------------
   @Put(':id')
   @ApiOperation({ summary: 'Change artist with specified id' })
   @ApiParam({ name: 'id', required: true, description: 'Artist`s id' })
@@ -70,6 +78,7 @@ export class ArtistController {
     return this.artistService.update(id, updateArtistDto);
   }
 
+  //!! -------------------------------------------------
   @Delete(':id')
   @ApiOperation({ summary: 'Delete artist with specified id' })
   @ApiParam({ name: 'id', required: true, description: 'Artist`s id' })

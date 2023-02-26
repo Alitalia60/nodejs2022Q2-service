@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, Logger } from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,13 +8,16 @@ import { Artist } from '../artist/entities/artist.entity';
 
 @Injectable()
 export class AlbumService {
+  private readonly customLogger: Logger;
   constructor(
     @InjectRepository(Album)
     private albumRepository: Repository<Album>,
 
     @InjectRepository(Artist)
     private artistRepository: Repository<Artist>,
-  ) { }
+  ) {
+    this.customLogger = new Logger('Album');
+  }
 
   async create(createAlbumDto: CreateAlbumDto) {
     const album = new Album();
@@ -24,7 +27,9 @@ export class AlbumService {
         id: createAlbumDto.artistId,
       });
       if (!artist) {
-        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+        const message = 'Artist not found';
+        this.customLogger.error(`${message}`);
+        throw new HttpException(message, HttpStatus.NOT_FOUND);
       }
       album.artist = artist;
     }

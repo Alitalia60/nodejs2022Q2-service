@@ -7,17 +7,20 @@ import {
   Delete,
   HttpStatus,
   HttpCode,
+  UseGuards
 } from '@nestjs/common';
 import { FavoritesService } from './favorites.service';
 import { ParseUUIDPipe } from '@nestjs/common/pipes';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('favs')
 @Controller('favs')
 export class FavoritesController {
   constructor(private readonly favoritesService: FavoritesService) { }
 
-  //!!
+  //!! -------------------------------------------------
+  @UseGuards(JwtAuthGuard)
   @Get()
   @ApiOperation({ summary: 'List all favorites' })
   @ApiResponse({ status: HttpStatus.OK, description: 'Success' })
@@ -25,7 +28,8 @@ export class FavoritesController {
     return this.favoritesService.findAll();
   }
 
-  //!!
+  //!! -------------------------------------------------
+  @UseGuards(JwtAuthGuard)
   @Post('track/:id')
   @ApiParam({ name: 'id', required: true, description: 'Track`s id (UUID)' })
   @ApiOperation({ summary: 'Add track with specified id to favorites ' })
@@ -40,7 +44,8 @@ export class FavoritesController {
     // return this.favoritesService.addTrackToFavs(id);
   }
 
-  //!!
+  //!! -------------------------------------------------
+  @UseGuards(JwtAuthGuard)
   @Post('album/:id')
   @ApiParam({ name: 'id', required: true, description: 'Album`s id (UUID)' })
   @ApiOperation({ summary: 'Add album with specified id to favorites ' })
@@ -55,7 +60,8 @@ export class FavoritesController {
     // return this.favoritesService.addAlbumToFavs(id);
   }
 
-  //!!
+  //!! -------------------------------------------------
+  @UseGuards(JwtAuthGuard)
   @Post('artist/:id')
   @ApiParam({ name: 'id', required: true, description: 'Post`s id (UUID)' })
   @ApiOperation({ summary: 'Add artist with specified id to favorites ' })
@@ -70,7 +76,8 @@ export class FavoritesController {
     // return this.favoritesService.addArtistToFavs(id);
   }
 
-  //!!
+  //!! -------------------------------------------------
+  @UseGuards(JwtAuthGuard)
   @Delete('track/:id')
   @ApiParam({ name: 'id', required: true, description: 'Track`s id (UUID)' })
   @ApiResponse({ status: HttpStatus.CREATED, description: 'Success' })
@@ -85,7 +92,8 @@ export class FavoritesController {
     return this.favoritesService.removeItemFromFavs('track', id);
   }
 
-  //!!
+  //!! -------------------------------------------------
+  @UseGuards(JwtAuthGuard)
   @Delete('album/:id')
   @ApiParam({ name: 'id', required: true, description: 'Album`s id (UUID)' })
   @ApiOperation({ summary: 'Delete album with specified id from favorites ' })
@@ -100,7 +108,8 @@ export class FavoritesController {
     return this.favoritesService.removeItemFromFavs('album', id);
   }
 
-  //!!
+  //!! -------------------------------------------------
+  @UseGuards(JwtAuthGuard)
   @Delete('artist/:id')
   @ApiOperation({ summary: 'Delete artist with specified id from favorites ' })
   @ApiParam({ name: 'id', required: true, description: 'Artist`s id (UUID)' })

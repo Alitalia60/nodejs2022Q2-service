@@ -4,7 +4,6 @@ import { HttpStatus } from '@nestjs/common/enums';
 import {
   Controller,
   Get,
-  // Post,
   Body,
   Put,
   Param,
@@ -17,7 +16,6 @@ import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HttpExceptionFilter } from '../exeptions/http-exeptions.filter';
-// import { AppErrorsFilter } from 'src/exeptions/app-errors.filter';
 
 //!! ------------------------------------------------
 @ApiTags('user')

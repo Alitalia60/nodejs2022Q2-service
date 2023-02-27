@@ -20,7 +20,6 @@ dotenvConfig();
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
-    // ConfigModule,
     PassportModule,
     UserModule,
     JwtModule.register({

@@ -40,13 +40,6 @@ export class ArtistService {
   }
 
   async remove(id: string) {
-    // await dataSource
-    //   .createQueryBuilder()
-    //   .delete()
-    //   .from(Artist)
-    //   .where('id = :id', { id: id })
-    //   .execute();
-
     const result = await this.artistRepository.delete({ id: id });
     if (result.affected === 0) {
       throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);

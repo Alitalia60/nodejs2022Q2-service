@@ -1,4 +1,7 @@
 /* eslint-disable prettier/prettier */
+import { ParseUUIDPipe } from '@nestjs/common/pipes';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -7,14 +10,15 @@ import {
   Delete,
   HttpStatus,
   HttpCode,
-  UseGuards
+  UseGuards,
+  UseFilters
 } from '@nestjs/common';
+
 import { FavoritesService } from './favorites.service';
-import { ParseUUIDPipe } from '@nestjs/common/pipes';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { HttpExceptionFilter } from '../exeptions/http-exeptions.filter';
 
 @ApiTags('favs')
+@UseFilters(new HttpExceptionFilter(FavoritesController.name))
 @Controller('favs')
 export class FavoritesController {
   constructor(private readonly favoritesService: FavoritesService) { }

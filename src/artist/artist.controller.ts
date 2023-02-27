@@ -1,3 +1,4 @@
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -10,16 +11,17 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
-
+  UseFilters,
 } from '@nestjs/common';
 import { ArtistService } from './artist.service';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { HttpExceptionFilter } from '../exeptions/http-exeptions.filter';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @ApiTags('artist')
 @UseGuards(JwtAuthGuard)
+@UseFilters(new HttpExceptionFilter(ArtistController.name))
 @Controller('artist')
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) { }

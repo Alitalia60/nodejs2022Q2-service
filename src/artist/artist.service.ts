@@ -25,7 +25,7 @@ export class ArtistService {
   async findOne(id: string) {
     const artist = await this.artistRepository.findOneBy({ id: id });
     if (!artist) {
-      throw new HttpException('Aкешые not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
     }
     return artist;
   }
@@ -33,7 +33,7 @@ export class ArtistService {
   async update(id: string, updateArtistDto: UpdateArtistDto) {
     const artist = await this.artistRepository.findOneBy({ id: id });
     if (!artist) {
-      throw new HttpException('Aкешые not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
     }
     Object.assign(artist, updateArtistDto);
     return await this.artistRepository.save(artist);

@@ -23,11 +23,11 @@ export class Track {
 
   @ManyToOne(() => Artist, (artist) => artist.tracks, { onDelete: 'SET NULL' })
   @JoinColumn({ name: 'artistId', referencedColumnName: 'id' })
-  artist: Artist;
+  artist: Artist | null;
 
   @ManyToOne(() => Album, (album) => album.tracks, { onDelete: 'SET NULL' })
   @JoinColumn({ name: 'albumId', referencedColumnName: 'id' })
-  album: Album;
+  album: Album | null;
 
   @ManyToMany(() => Favorites, (favorites) => favorites.tracks)
   // tracks: Track[];

@@ -8,6 +8,7 @@ import {
   Delete,
   HttpCode,
   UseGuards,
+  UseFilters,
 } from '@nestjs/common';
 import { TrackService } from './track.service';
 import { CreateTrackDto } from './dto/create-track.dto';
@@ -16,9 +17,11 @@ import { ParseUUIDPipe } from '@nestjs/common/pipes';
 import { HttpStatus } from '@nestjs/common/enums';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { HttpExceptionFilter } from 'src/exeptions/http-exeptions.filter';
 
 //!! -------------------------------------------------
 @UseGuards(JwtAuthGuard)
+@UseFilters(new HttpExceptionFilter(TrackController.name))
 @ApiTags('track')
 @Controller('track')
 export class TrackController {

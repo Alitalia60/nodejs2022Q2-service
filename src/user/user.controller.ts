@@ -1,3 +1,6 @@
+import { ValidationPipe } from '@nestjs/common/pipes';
+import { HttpCode, UseGuards } from '@nestjs/common/decorators';
+import { HttpStatus } from '@nestjs/common/enums';
 import {
   Controller,
   Get,
@@ -7,26 +10,19 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
+  UseFilters,
 } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
-// import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { HttpStatus } from '@nestjs/common/enums';
-import { HttpCode, UseGuards } from '@nestjs/common/decorators';
-import { ValidationPipe } from '@nestjs/common/pipes';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import {
-  // ApiBody,
-  ApiOperation,
-  ApiParam,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { HttpExceptionFilter } from '../exeptions/http-exeptions.filter';
+// import { AppErrorsFilter } from 'src/exeptions/app-errors.filter';
 
 //!! ------------------------------------------------
-
 @ApiTags('user')
 @UseGuards(JwtAuthGuard)
+@UseFilters(new HttpExceptionFilter(UserController.name))
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }

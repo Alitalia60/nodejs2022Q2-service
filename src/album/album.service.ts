@@ -28,7 +28,6 @@ export class AlbumService {
       });
       if (!artist) {
         const message = 'Artist not found';
-        this.customLogger.error(`${message}`);
         throw new HttpException(message, HttpStatus.NOT_FOUND);
       }
       album.artist = artist;

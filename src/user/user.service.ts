@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+// import { CustomFIlterExeptions } from 'src/exeptions/http-exeptions.filter';
 // import { LoggingService } from '../loggers/logging.service';
 
 @Injectable()
@@ -33,7 +34,8 @@ export class UserService {
   async findAll() {
     return await this.userRepository
       .createQueryBuilder('user')
-      .select(['user.id', 'user.login', 'user.password'])
+      .select(['user.id', 'user.login'])
+      // .select(['user.id', 'user.login', 'user.password'])
       .getMany();
   }
 
@@ -41,9 +43,12 @@ export class UserService {
   async findOne(id: string) {
     const user = await this.userRepository.findOneBy({ id });
     if (!user) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      const message = 'User not found';
+      this.customLogger.error(message);
+      throw new HttpException(message, HttpStatus.NOT_FOUND);
     }
-    return user;
+    const { password, createdAt, updatedAt, version, ...res } = user;
+    return res;
   }
 
   //!! -------------------------------

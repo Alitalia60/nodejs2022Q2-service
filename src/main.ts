@@ -15,10 +15,9 @@ dotenvConfig();
 const PORT = Number(process.env.PORT) || 4000;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    // logger: ['error'],
-    // logger: new LoggingService(),
-
+  const app = await NestFactory.create(AppModule, {});
+  await app.listen(PORT, () => {
+    console.log(`Server is running on port: ${PORT}`);
   });
 
   const configSwaggwDoc = new DocumentBuilder()
@@ -40,10 +39,6 @@ async function bootstrap() {
   SwaggerModule.setup('doc', app, documentDoc);
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
-  // app.useLogger(app.get(LoggingService));
-  await app.listen(PORT, () => {
 
-    console.log(`Server is running on port: ${PORT}`);
-  });
 }
 bootstrap();

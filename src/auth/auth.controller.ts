@@ -1,3 +1,6 @@
+import { ValidationPipe } from '@nestjs/common/pipes';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { HttpStatus } from '@nestjs/common/enums';
 import {
   Controller,
   UseGuards,
@@ -6,21 +9,22 @@ import {
   Body,
   Get,
   HttpCode,
+  UseFilters,
 } from '@nestjs/common';
+
 import { User } from '../user/entities/user.entity';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { AuthService } from './auth.service';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { HttpStatus } from '@nestjs/common/enums';
-import { AuthUserDto } from 'src/user/dto/auth-user.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserService } from '../user/user.service';
-import { ValidationPipe } from '@nestjs/common/pipes';
 import { ValidateTokenDto } from '../validators/token-validate.service';
 import { ValidateAuthDto } from '../validators/auth-dto-validate.service';
+import { HttpExceptionFilter } from '../exeptions/http-exeptions.filter';
+import { AuthUserDto } from '../user/dto/auth-user.dto';
 
 @ApiTags('auth')
+@UseFilters(new HttpExceptionFilter(AuthController.name))
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -56,10 +60,11 @@ export class AuthController {
     description: 'Required properties: login, password',
     type: CreateUserDto,
   })
-  async createUser(
-    @Body(ValidationPipe) createUserDto: CreateUserDto,
-  ): Promise<User> {
-    return this.authService.createUser(createUserDto);
+  @UseGuards(ValidateAuthDto)
+  async createUser(@Body(ValidationPipe) createUserDto: CreateUserDto) {
+    const user = await this.authService.createUser(createUserDto);
+    const { password, createdAt, updatedAt, version, ...res } = user;
+    return res;
   }
 
   //!! REFRESH------------------------------------------
@@ -81,7 +86,7 @@ export class AuthController {
   })
   @HttpCode(HttpStatus.OK)
   async refreshToken(@Request() req) {
-    return this.authService.refreshTokensPair(req)
+    return this.authService.refreshTokensPair(req);
     // return req.user
   }
 

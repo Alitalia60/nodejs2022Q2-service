@@ -14,7 +14,7 @@ export class AuthService {
     private jwtService: JwtService,
     private userService: UserService,
   ) {
-    this.customLogger = new Logger('Auth');
+    this.customLogger = new Logger(AuthService.name);
   }
 
   //!! ------------------------------------
@@ -34,7 +34,7 @@ export class AuthService {
     const user = await this.userService.findByLogin(login);
     if (user) {
       const message = 'User already exists';
-      this.customLogger.error(`${message}: ${login}`);
+      // this.customLogger.error(`${message}: ${login}`);
       throw new HttpException(message, HttpStatus.UNPROCESSABLE_ENTITY);
     }
     return await this.userService.create(createUserDto);

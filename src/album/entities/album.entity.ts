@@ -27,7 +27,7 @@ export class Album {
     onDelete: 'SET NULL',
   })
   @JoinColumn({ name: 'artistId', referencedColumnName: 'id' })
-  artist: Artist;
+  artist: Artist | null;
 
   @OneToMany(() => Track, (track) => track.album, {
     cascade: ['remove'],

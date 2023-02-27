@@ -1,14 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { Put, Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
+import { ParseUUIDPipe } from '@nestjs/common/pipes';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Put, Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, UseGuards, UseFilters } from '@nestjs/common';
+
 import { AlbumService } from './album.service';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
-import { ParseUUIDPipe } from '@nestjs/common/pipes';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { HttpExceptionFilter } from '../exeptions/http-exeptions.filter';
 
 @ApiTags('album')
 @UseGuards(JwtAuthGuard)
+@UseFilters(new HttpExceptionFilter(AlbumController.name))
 @Controller('album')
 export class AlbumController {
   constructor(private readonly albumService: AlbumService) { }

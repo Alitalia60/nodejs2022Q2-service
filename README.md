@@ -13,15 +13,19 @@ git clone {repository URL}
 
 ## Select branch 'Docker+Postgres'
 
-
-## Create '.env' file or copy it from '.env.example'
-
-
 ## Installing NPM modules
 
 ```
 npm install
+
+git checkout loggin_authenification
+
+Create '.env' file or copy it from '.env.example'
 ```
+
+> NOTE
+>
+> перед запуском прошу закомментировать в модуле `app.module.ts` строки 14, 27 со ссылкой на импорт удаленного модуля.
 
 ## Running application
 

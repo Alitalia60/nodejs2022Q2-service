@@ -1,131 +1,14 @@
 {
 	"info": {
-		"_postman_id": "e4a3e63d-bda0-43b1-817b-5f294f52cdd8",
+		"_postman_id": "4d30ebae-2e75-4dc2-9273-08ec3fb3e9d0",
 		"name": "Home library",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "18339158"
+		"_exporter_id": "23920464"
 	},
 	"item": [
 		{
 			"name": "User",
 			"item": [
-				{
-					"name": "Add 4 users",
-					"item": [
-						{
-							"name": "Add new user Peter",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"login\": \"Peter\",\r\n  \"password\": \"repet_psw\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:4000/user/",
-									"host": [
-										"localhost"
-									],
-									"port": "4000",
-									"path": [
-										"user",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Add new user John",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"login\": \"John\",\r\n  \"password\": \"nohJ_psw\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:4000/user/",
-									"host": [
-										"localhost"
-									],
-									"port": "4000",
-									"path": [
-										"user",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Add new user Sceleton",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:4000/user/",
-									"host": [
-										"localhost"
-									],
-									"port": "4000",
-									"path": [
-										"user",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Add new user Valkiria",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:4000/user/",
-									"host": [
-										"localhost"
-									],
-									"port": "4000",
-									"path": [
-										"user",
-										""
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
 				{
 					"name": "Get all users",
 					"request": {
@@ -162,42 +45,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/user/",
+							"raw": "localhost:4000/user/846c4e44-d927-40e3-9062-25f5746bfbfd",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
 								"user",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Add new user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"login1\": \"John\",\r\n  \"password\": \"nohJ_psw\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4000/user/",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"user",
-								""
+								"846c4e44-d927-40e3-9062-25f5746bfbfd"
 							]
 						}
 					},
@@ -206,11 +61,11 @@
 				{
 					"name": "Update user",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"login\": \"Valkiria\",\r\n  \"password\": \"airiklaV_psw\"\r\n}",
+							"raw": "{\r\n  \"oldPassword\": \"airiclaV_psw\",\r\n  \"newPassword\": \"new_airiklaV_psw\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -218,14 +73,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:4000/user/fb5683d2-7fc4-4d0b-a3c5-25c0cd275c4b",
+							"raw": "localhost:4000/user/4541ef13-fdf3-458a-acc9-617310e57bbe",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
 								"user",
-								"fb5683d2-7fc4-4d0b-a3c5-25c0cd275c4b"
+								"4541ef13-fdf3-458a-acc9-617310e57bbe"
 							]
 						}
 					},
@@ -237,16 +92,1049 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/user/5103c0df-cfb7-4d24-826a-1834c122bb52",
+							"raw": "localhost:4000/user/ed0bcf42-bb93-4ca9-8b35-50f6923a0636",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
 								"user",
-								"5103c0df-cfb7-4d24-826a-1834c122bb52"
+								"ed0bcf42-bb93-4ca9-8b35-50f6923a0636"
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Album",
+			"item": [
+				{
+					"name": "Add 3 albums",
+					"item": [
+						{
+							"name": "Add new album 2020",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Songs 2027\",\r\n  \"year\": 2027,\r\n  \"artistId\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/album/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"album",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new album 2026",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Songs 2026\",\r\n  \"year\": 2026,\r\n  \"artistId\":\"8dce891a-d8c5-4d70-b4af-bba387579bb0\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/album/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"album",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new album 2021",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Happy NY 2020\",\r\n  \"year\": 2020,\r\n  \"artistId\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/album/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"album",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new album 2022",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Dance 2022\",\r\n  \"year\": 2022,\r\n  \"artistId\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/album/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"album",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all albums",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/album/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"album",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get album by id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/album/1e59327e-e658-4c22-b2dd-a137c29f3090",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"album",
+								"1e59327e-e658-4c22-b2dd-a137c29f3090"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update album",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Spring+Summaer 2019\",\r\n  \"year\": 2019,\r\n  \"artistId\":null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/album/8b40451a-e4a7-4c76-9bed-d22a17652cb8",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"album",
+								"8b40451a-e4a7-4c76-9bed-d22a17652cb8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete album",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/album/2b4b0b53-c96e-439c-b44d-fa79edd55e61",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"album",
+								"2b4b0b53-c96e-439c-b44d-fa79edd55e61"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Artist",
+			"item": [
+				{
+					"name": "Add 3 artists",
+					"item": [
+						{
+							"name": "Add artist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"name\": \"Morgan Wallen\",\r\n  \"grammy\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/artist/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"artist",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add artist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"name\": \"Harry Styles\",\r\n  \"grammy\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/artist/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"artist",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add artist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"name\": \"Stevie Wonder\",\r\n  \"grammy\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/artist/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"artist",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all artists",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/artist/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"artist",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get  artist by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/artist/af13bef7-9f39-4b11-9d5f-3279095b3357",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"artist",
+								"af13bef7-9f39-4b11-9d5f-3279095b3357"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change artist",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\": \"New Artist name\",\r\n  \"grammy\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/artist/af13bef7-9f39-4b11-9d5f-3279095b3357",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"artist",
+								"af13bef7-9f39-4b11-9d5f-3279095b3357"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete artist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\": \"New Artist name\",\r\n  \"grammy\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/artist/af13bef7-9f39-4b11-9d5f-3279095b3357",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"artist",
+								"af13bef7-9f39-4b11-9d5f-3279095b3357"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tracks",
+			"item": [
+				{
+					"name": "Get all tracks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/track/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"track",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get track bi Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/track/31697360-b77f-4048-8390-43874981777c",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"track",
+								"31697360-b77f-4048-8390-43874981777c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete track",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/track/85b95af3-8856-4263-8e69-e0ea6552a2e7",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"track",
+								"85b95af3-8856-4263-8e69-e0ea6552a2e7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add track",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Track name\",\r\n  \"duration\": 120,\r\n  \"artistId\":\"46aef831-a68f-4d99-a291-8be1336ff506\",\r\n  \"albumId\":\"7349d282-7f0c-49a1-9910-c51300c24eef\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/track/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"track",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update track",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"New Track name\",\r\n  \"duration\": 150\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/track/85b95af3-8856-4263-8e69-e0ea6552a2e7",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"track",
+								"85b95af3-8856-4263-8e69-e0ea6552a2e7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favorites",
+			"item": [
+				{
+					"name": "Get all favs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get favs by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add ttrack to favs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/track/",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								"track",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove ttrack from favs",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/track/cc0cf9dd-6b9e-4c30-a4de-6a5cc4649e94",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								"track",
+								"cc0cf9dd-6b9e-4c30-a4de-6a5cc4649e94"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add artist to favs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/artist/356ae4c8-0ec0-4080-b382-996dd9d8c8e5",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								"artist",
+								"356ae4c8-0ec0-4080-b382-996dd9d8c8e5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Del artist from favs",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/artist/356ae4c8-0ec0-4080-b382-996dd9d8c8e5",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								"artist",
+								"356ae4c8-0ec0-4080-b382-996dd9d8c8e5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add album to favs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/album/1c3bd68b-2312-4cd0-a446-e6f0b1e9ddd7",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								"album",
+								"1c3bd68b-2312-4cd0-a446-e6f0b1e9ddd7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Del album from favs",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/favs/album/7589ee1a-7215-4c8e-9ffc-b78ae83cae0d",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"favs",
+								"album",
+								"7589ee1a-7215-4c8e-9ffc-b78ae83cae0d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Add 4 users",
+					"item": [
+						{
+							"name": "Add new user Peter",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"Peter Pan2\",\r\n  \"password\": \"repet_psw\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new user John",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"John Dow\",\r\n  \"password\": \"nohJ_psw\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new user Sceleton",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"Sceleton\",\r\n  \"password\": \"notelecS_psw\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new user Valkiria",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"Valkirya\",\r\n  \"password\": \"airiclaV_psw\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"login\": \"Someon rukkola\",\r\n  \"password\": \"Turuhany\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user Peter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"login\": \"Peter Pan2\",\r\n  \"password\": \"repet_psw\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TEST profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG4gRG93IiwiaWF0IjoxNjc3MjY2NTA3LCJleHAiOjE2NzcyNzAxMDd9.EUTBhgTu1UQRFAlR2m_Q1OhI2M06y1QLyhZwH8-ZS9M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"login\": \"John Dow\",\r\n  \"password\": \"nohJ_psw\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/auth/profile",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user John Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"login\": \"John Dow\",\r\n  \"password\": \"nohJ_psw\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REFRESH John",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG4gRG93IiwiaWF0IjoxNjc3MjY2NTA3LCJleHAiOjE2NzcyNzAxMDd9.EUTBhgTu1UQRFAlR2m_Q1OhI2M06y1QLyhZwH8-ZS9M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"login\": \"John Dow\",\r\n  \"password\": \"nohJ_psw\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/auth/refresh",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Swagger doc",
+			"item": [
+				{
+					"name": "Swagger doc",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}

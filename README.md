@@ -11,11 +11,21 @@
 git clone {repository URL}
 ```
 
+## Select branch 'Docker+Postgres'
+
 ## Installing NPM modules
 
 ```
 npm install
+
+git checkout loggin_authenification
+
+Create '.env' file or copy it from '.env.example'
 ```
+
+> NOTE
+>
+> перед запуском прошу закомментировать в модуле `app.module.ts` строки 14, 27 со ссылкой на импорт удаленного модуля.
 
 ## Running application
 
@@ -70,3 +80,27 @@ npm run format
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+---
+
+2. REST service: Containerization, Docker
+
+run follow conmmands:
+
+```
+
+### 2.
+
+    `docker-compose up --build`
+
+```
+
+### Migrations
+
+for migration run
+
+```
+    npm run migration:create
+    npm run migration:generate
+    npm run migration:run
+```
